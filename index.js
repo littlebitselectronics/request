@@ -188,7 +188,7 @@ Request.prototype.init = function (options) {
       self.tunnel = true
     }
   }
-  
+
   if (!self.uri.pathname) {self.uri.pathname = '/'}
 
   if (!self.uri.host) {
@@ -1311,6 +1311,9 @@ request.defaults = function (options, requester) {
   de.del = def(request.del)
   de.cookie = def(request.cookie)
   de.jar = request.jar
+  de.defaults = function(moreOptions, requester){
+    return request.defaults(_.merge({}, options, moreOptions), requester)
+  }
   return de
 }
 
